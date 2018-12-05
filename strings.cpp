@@ -207,4 +207,133 @@ void multiply(const char *a, const char *b)
     free(c);
 }
 
-// 
+// 3.1
+void Reverse(char *pb, char *pe)
+{
+    if(pb == NULL || pe == NULL) return;
+    while(pb < pe)
+    {
+        char tmp = *pb;
+        *pb = *pe;
+        *pe = tmp;
+        pb++;
+        pe--;
+    }
+}
+
+char* ReverseSentence(char *pData)
+{
+    if(pData == NULL) return NULL;
+    char *pBegin = pData;
+    char *pEnd = pData;
+    while(*pEnd != '\0')
+    {
+        pEnd++;
+    }
+    pEnd--;
+    Reverse(pBegin, pEnd);
+    pBegin = pEnd = pData;
+    while(*pBegin != '\0')
+    {
+        if(*pBegin == ' ')
+        {
+            pBegin ++;
+            pEnd ++;
+            continue;
+        }
+        else
+        {
+            if(*pEnd == ' ' || *pEnd == '\0')
+            {
+                Reverse(pBegin, --pEnd);
+                pBegin = ++pEnd;
+            }else{
+                pEnd++;
+            }
+        }
+    }
+    return pData;
+}
+
+// 删除模式串中出现的元素
+// 最优解：为每一个元素配上素数， 求素数的乘机整除
+void fun(char *s)
+{
+    assert(s  != NULL);
+    int i = 0, j = 0;
+    while(s[j] != '\0')
+    {
+        while(s[j] == 'a' || s[j] == 'b' || s[j] == 'c' || s[j] == 'd')
+        {
+            j++;
+        }
+        s[i++] = s[j++];
+    }
+    s[i] = '\0';
+}
+
+// 删除字符串中的空格
+void fun(char* s)
+{
+    int i = 0, j =0;
+    while(s[j] == ' ')
+    {
+        j++;
+    }
+    int len = strlen(s) - 1;
+    while(s[len] == ' ') len--;
+    s[len+1] = '\0';
+
+    while(s[j] != '\0')
+    {
+        while(s[j] == ' ') j++;
+        if(s[j-1] == ' ' && s[j-2] == ' ' && i != 0)
+        {
+            s[i++] = ' ';
+        }
+        s[i++] = s[j++];
+    }
+    s[i] = '\0';
+}
+
+// 第一个出现的字符
+void fun(const char * str)
+{
+    assert(str != NULL);
+    const int size = 256;
+    unsigned int hashTable[size];
+    for(unsigned int i = 0; i < size; i++)
+    {
+        hashTable[i] = 0;
+    }
+    const char *hashkey = str;
+    while(*(hashkey) != '\0')
+    {
+        hashtable[*(hashkey++)] ++;
+    }
+    hashkey = str;
+    while(*hashkey != '\0')
+    {
+        if(hashtable[*hashkey] == 1)
+        {
+            cout << *hashkey;
+            return;
+        }
+        hashkey++;
+    }
+}
+
+// 所有字符是否都不相同
+bool char_set[256];
+int isunique(const char* str)
+{
+    assert(str != NULL);
+    int len = strlen(str);
+    for(unsigned int i = 0; i < len; ++i)
+    {
+        int val = str[i];
+        if(char_set[val]) return 0;
+        char_set[val]  = true;
+    }
+    return 1;
+}
